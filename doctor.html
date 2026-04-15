@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Doctor Dashboard</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif}
+
+body{
+  background:linear-gradient(120deg,#e0f2fe,#ecfeff);
+}
+
+/* HEADER */
+.header{
+  display:flex;
+  justify-content:space-between;
+  padding:20px 40px;
+  background:white;
+  box-shadow:0 4px 15px rgba(0,0,0,0.08);
+}
+
+.logo{
+  font-size:20px;
+  font-weight:600;
+  color:#0f172a;
+}
+
+/* MAIN */
+.container{
+  display:grid;
+  grid-template-columns:1.3fr 1fr;
+  gap:30px;
+  padding:30px;
+}
+
+/* LEFT PANEL */
+.left{
+  background:white;
+  padding:30px;
+  border-radius:25px;
+  box-shadow:0 10px 30px rgba(0,0,0,0.1);
+}
+
+/* RIGHT PANEL */
+.right{
+  display:flex;
+  flex-direction:column;
+  gap:20px;
+}
+
+/* TITLES */
+.section-title{
+  font-size:18px;
+  margin-bottom:10px;
+  color:#1e3a8a;
+}
+
+/* INPUT */
+.form-group{margin-bottom:15px}
+
+input, select{
+  width:100%;
+  padding:10px;
+  border-radius:10px;
+  border:1px solid #ccc;
+}
+
+/* OMR STYLE */
+.omr{
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px;
+}
+
+.omr label{
+  padding:6px 14px;
+  border:1px solid #ccc;
+  border-radius:20px;
+  cursor:pointer;
+}
+
+.omr input{display:none}
+
+.omr input:checked + span{
+  background:#1e3a8a;
+  color:white;
+  padding:6px 14px;
+  border-radius:20px;
+}
+
+/* BUTTON */
+button{
+  width:100%;
+  padding:14px;
+  background:#1e3a8a;
+  color:white;
+  border:none;
+  border-radius:25px;
+  font-size:16px;
+  margin-top:10px;
+  cursor:pointer;
+}
+
+/* RESULT CARDS */
+.card{
+  background:white;
+  padding:20px;
+  border-radius:20px;
+  box-shadow:0 10px 25px rgba(0,0,0,0.1);
+}
+
+/* SCORE */
+.circle{
+  width:140px;
+  height:140px;
+  border-radius:50%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  margin:10px auto;
+  font-size:28px;
+  font-weight:600;
+  color:white;
+}
+
+.high{background:red;}
+.medium{background:orange;}
+.low{background:green;}
+
+ul{margin-top:10px}
+li{margin-left:20px;margin-bottom:5px}
+
+</style>
+</head>
+
+<body>
+
+<div class="header">
+  <div class="logo">Doctor Panel - HealthAI</div>
+</div>
+
+<div class="container">
+
+<!-- LEFT SIDE -->
+<div class="left">
+
+<h2 class="section-title">Patient Clinical Data</h2>
+
+<form action="/doctor" method="POST">
+
+<!-- BASIC -->
+<div class="form-group">
+  <label>Age</label>
+  <input type="number" name="Age" required>
+</div>
+
+<div class="form-group">
+  <label>Gender</label>
+  <div class="omr">
+    <label><input type="radio" name="Gender" value="0"><span>Male</span></label>
+    <label><input type="radio" name="Gender" value="1"><span>Female</span></label>
+  </div>
+</div>
+
+<!-- LIFESTYLE -->
+<h3 class="section-title">Lifestyle Factors</h3>
+
+<div class="form-group">
+  <label>Exercise</label>
+  <div class="omr">
+    <label><input type="radio" name="Exercise Habits" value="2"><span>High</span></label>
+    <label><input type="radio" name="Exercise Habits" value="1"><span>Medium</span></label>
+    <label><input type="radio" name="Exercise Habits" value="0"><span>Low</span></label>
+    <label><input type="radio" name="Exercise Habits" value="0"><span>No</span></label>
+  </div>
+</div>
+
+<div class="form-group">
+  <label>Smoking</label>
+  <div class="omr">
+    <label><input type="radio" name="Smoking" value="1"><span>Yes</span></label>
+    <label><input type="radio" name="Smoking" value="0"><span>No</span></label>
+  </div>
+</div>
+
+<div class="form-group">
+  <label>Alcohol</label>
+  <div class="omr">
+    <label><input type="radio" name="Alcohol Consumption" value="2"><span>High</span></label>
+    <label><input type="radio" name="Alcohol Consumption" value="1"><span>Medium</span></label>
+    <label><input type="radio" name="Alcohol Consumption" value="0"><span>Low</span></label>
+    <label><input type="radio" name="Alcohol Consumption" value="0"><span>No</span></label>
+  </div>
+</div>
+
+<div class="form-group">
+  <label>Stress</label>
+  <div class="omr">
+    <label><input type="radio" name="Stress Level" value="2"><span>High</span></label>
+    <label><input type="radio" name="Stress Level" value="1"><span>Medium</span></label>
+    <label><input type="radio" name="Stress Level" value="0"><span>Low</span></label>
+  </div>
+</div>
+
+<div class="form-group">
+  <label>Sugar</label>
+  <div class="omr">
+    <label><input type="radio" name="Sugar Consumption" value="2"><span>High</span></label>
+    <label><input type="radio" name="Sugar Consumption" value="1"><span>Medium</span></label>
+    <label><input type="radio" name="Sugar Consumption" value="0"><span>Low</span></label>
+  </div>
+</div>
+
+<!-- MEDICAL -->
+<h3 class="section-title">Medical Conditions</h3>
+
+<div class="form-group">
+  <label>Diabetes</label>
+  <div class="omr">
+    <label><input type="radio" name="Diabetes" value="1"><span>Yes</span></label>
+    <label><input type="radio" name="Diabetes" value="0"><span>No</span></label>
+    <label><input type="radio" name="Diabetes" value="0.5"><span>Unknown</span></label>
+  </div>
+</div>
+
+<div class="form-group">
+  <label>High Blood Pressure</label>
+  <div class="omr">
+    <label><input type="radio" name="High Blood Pressure" value="1"><span>Yes</span></label>
+    <label><input type="radio" name="High Blood Pressure" value="0"><span>No</span></label>
+    <label><input type="radio" name="High Blood Pressure" value="0.5"><span>Unknown</span></label>
+  </div>
+</div>
+
+<div class="form-group">
+  <label>Family Heart Disease</label>
+  <div class="omr">
+    <label><input type="radio" name="Family heart Disease" value="1"><span>Yes</span></label>
+    <label><input type="radio" name="Family heart Disease" value="0"><span>No</span></label>
+  </div>
+</div>
+
+<div class="form-group">
+  <label>High LDL Cholesterol</label>
+  <select name="High LDL Cholesterol">
+    <option value="1">Yes</option>
+    <option value="0">No</option>
+  </select>
+</div>
+
+<!-- EXTRA -->
+<h3 class="section-title">Advanced Metrics</h3>
+
+<div class="form-group">
+  <label>Sleep Hours</label>
+  <input type="number" step="0.1" name="Sleep Hours">
+</div>
+
+<div class="form-group">
+  <label>Weight (Kg)</label>
+  <input type="number" step="0.1" name="weight in Kg">
+</div>
+
+<div class="form-group">
+  <label>Height (cm)</label>
+  <input type="number" step="0.1" name="Height in cm">
+</div>
+
+<button type="submit">Analyze Patient</button>
+
+</form>
+
+</div>
+
+<!-- RIGHT SIDE -->
+<div class="right">
+
+{% if prediction is defined %}
+
+<div class="card">
+  {% if prediction == 1 %}
+    <div class="circle high">HIGH</div>
+  {% elif prediction == 0 %}
+    <div class="circle low">LOW</div>
+  {% else %}
+    <div class="circle medium">MED</div>
+  {% endif %}
+  <p style="text-align:center;">Clinical Risk</p>
+</div>
+
+<div class="card">
+  <h3>Risk Factors</h3>
+  <ul>
+    {% for r in reasons %}
+      <li>{{ r }}</li>
+    {% endfor %}
+  </ul>
+</div>
+
+<div class="card">
+  <h3>Doctor Recommendation</h3>
+  <p>{{ suggestion }}</p>
+</div>
+
+{% endif %}
+
+</div>
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Health Risk Dashboard</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif}
+
+body{
+  background: linear-gradient(135deg,#dbeafe,#fef3c7);
+}
+
+.header{
+  background:#2563eb;
+  color:#fff;
+  padding:20px;
+  text-align:center;
+  font-size:22px;
+  font-weight:600;
+}
+
+.container{
+  max-width:1100px;
+  margin:30px auto;
+  padding:20px;
+}
+
+.card{
+  background:rgba(255,255,255,0.9);
+  padding:25px;
+  border-radius:20px;
+  box-shadow:0 10px 30px rgba(0,0,0,0.1);
+  margin-bottom:20px;
+}
+
+.hero{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+
+.hero img{
+  width:150px;
+}
+
+h1{color:#1e3a8a;margin-bottom:10px}
+
+.form-group{margin-bottom:20px}
+
+label{
+  font-weight:600;
+  display:block;
+  margin-bottom:8px;
+}
+
+input[type="number"]{
+  width:100%;
+  padding:10px;
+  border-radius:10px;
+  border:1px solid #ccc;
+}
+
+.omr{
+  display:flex;
+  gap:10px;
+  flex-wrap:wrap;
+}
+
+.omr label{
+  border:1px solid #ccc;
+  padding:8px 15px;
+  border-radius:20px;
+  cursor:pointer;
+}
+
+.omr input{display:none}
+
+.omr input:checked + span{
+  background:#2563eb;
+  color:#fff;
+  padding:8px 15px;
+  border-radius:20px;
+}
+
+button{
+  width:100%;
+  padding:14px;
+  border:none;
+  border-radius:25px;
+  background:#2563eb;
+  color:#fff;
+  font-size:16px;
+  cursor:pointer;
+}
+
+button:hover{
+  background:#1e40af;
+}
+
+.result-box{
+  padding:20px;
+  border-radius:15px;
+  background:#f9fafb;
+}
+
+.high{color:red;font-size:22px;font-weight:600}
+.medium{color:orange;font-size:22px;font-weight:600}
+.low{color:green;font-size:22px;font-weight:600}
+
+.reason li{
+  margin-left:20px;
+  margin-top:5px;
+}
+
+.ai-box{
+  margin-top:20px;
+  padding:15px;
+  background:#eef2ff;
+  border-radius:12px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="header">AI Health Risk Assessment System</div>
+
+<div class="container">
+
+<!-- HERO -->
+<div class="card hero">
+  <div>
+    <h1>Patient Health Form</h1>
+    <p>Fill details to analyze your health risk using AI</p>
+  </div>
+  <img src="https://img.icons8.com/color/200/heart-health.png">
+</div>
+
+<!-- FORM -->
+<div class="card">
+<form action="/user" method="POST">
+
+<div class="form-group">
+<label>Age</label>
+<input type="number" name="Age" required>
+</div>
+
+<div class="form-group">
+<label>Gender</label>
+<div class="omr">
+<label><input type="radio" name="Gender" value="0" required><span>Male</span></label>
+<label><input type="radio" name="Gender" value="1"><span>Female</span></label>
+</div>
+</div>
+
+<div class="form-group">
+<label>Exercise</label>
+<div class="omr">
+<label><input type="radio" name="Exercise Habits" value="2" required><span>High</span></label>
+<label><input type="radio" name="Exercise Habits" value="1"><span>Medium</span></label>
+<label><input type="radio" name="Exercise Habits" value="0"><span>Low</span></label>
+<label><input type="radio" name="Exercise Habits" value="0"><span>No</span></label>
+</div>
+</div>
+
+<div class="form-group">
+<label>Smoking</label>
+<div class="omr">
+<label><input type="radio" name="Smoking" value="1" required><span>Yes</span></label>
+<label><input type="radio" name="Smoking" value="0"><span>No</span></label>
+</div>
+</div>
+
+<div class="form-group">
+<label>Family Heart Disease</label>
+<div class="omr">
+<label><input type="radio" name="Family heart Disease" value="1" required><span>Yes</span></label>
+<label><input type="radio" name="Family heart Disease" value="0"><span>No</span></label>
+</div>
+</div>
+
+<div class="form-group">
+<label>Diabetes</label>
+<div class="omr">
+<label><input type="radio" name="Diabetes" value="1" required><span>Yes</span></label>
+<label><input type="radio" name="Diabetes" value="0"><span>No</span></label>
+<label><input type="radio" name="Diabetes" value="0.5"><span>Unknown</span></label>
+</div>
+</div>
+
+<div class="form-group">
+<label>High Blood Pressure</label>
+<div class="omr">
+<label><input type="radio" name="High Blood Pressure" value="1" required><span>Yes</span></label>
+<label><input type="radio" name="High Blood Pressure" value="0"><span>No</span></label>
+<label><input type="radio" name="High Blood Pressure" value="0.5"><span>Unknown</span></label>
+</div>
+</div>
+
+<div class="form-group">
+<label>Alcohol</label>
+<div class="omr">
+<label><input type="radio" name="Alcohol Consumption" value="2" required><span>High</span></label>
+<label><input type="radio" name="Alcohol Consumption" value="1"><span>Medium</span></label>
+<label><input type="radio" name="Alcohol Consumption" value="0"><span>Low</span></label>
+<label><input type="radio" name="Alcohol Consumption" value="0"><span>No</span></label>
+</div>
+</div>
+
+<div class="form-group">
+<label>Stress</label>
+<div class="omr">
+<label><input type="radio" name="Stress Level" value="2" required><span>High</span></label>
+<label><input type="radio" name="Stress Level" value="1"><span>Medium</span></label>
+<label><input type="radio" name="Stress Level" value="0"><span>Low</span></label>
+<label><input type="radio" name="Stress Level" value="0"><span>No</span></label>
+</div>
+</div>
+
+<div class="form-group">
+<label>Sugar</label>
+<div class="omr">
+<label><input type="radio" name="Sugar Consumption" value="2" required><span>High</span></label>
+<label><input type="radio" name="Sugar Consumption" value="1"><span>Medium</span></label>
+<label><input type="radio" name="Sugar Consumption" value="0"><span>Low</span></label>
+<label><input type="radio" name="Sugar Consumption" value="0"><span>No</span></label>
+</div>
+</div>
+
+<button type="submit">Analyze Risk</button>
+
+</form>
+</div>
+
+<!-- RESULT -->
+{% if prediction is defined %}
+<div class="card result-box">
+
+{% if prediction == 2 %}
+  <div class="high">Risk: HIGH ⚠️</div>
+{% elif prediction == 1 %}
+  <div class="medium">Risk: MEDIUM ⚠️</div>
+{% else %}
+  <div class="low">Risk: LOW ✅</div>
+{% endif %}
+
+<strong>Reasons:</strong>
+<ul>
+{% for r in reasons %}
+<li>{{ r }}</li>
+{% endfor %}
+</ul>
+
+<p><strong>Suggestion:</strong> {{ suggestion }}</p>
+
+<div class="ai-box">
+<h3>AI Health Suggestion</h3>
+
+{% if ai_suggestion %}
+<p>{{ ai_suggestion }}</p>
+{% else %}
+<p>Click button to generate AI suggestion</p>
+{% endif %}
+
+<form action="/ai">
+<button type="submit">Get AI Suggestion</button>
+</form>
+
+</div>
+
+</div>
+{% endif %}
+
+</div>
+
+</body>
+</html>
