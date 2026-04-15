@@ -90,7 +90,14 @@ def user():
             suggestion = "Maintain your healthy lifestyle."
         else:
             suggestion = "Monitor health regularly and improve habits."
-    
+
+        session['pred'] = int(pred)
+        session['Age'] = Age
+        session['Smoking'] = Smoking
+        session['Stress'] = Stress
+        session['Suger'] = Suger
+        session['reasons'] = reasons
+        
         return render_template(
             'user.html',
             prediction=pred,
@@ -99,7 +106,7 @@ def user():
             # ai_suggestion= ai_suggestion  
         )
 
-    return render_template("user.html" , reasons = reasons)
+    return render_template("user.html" , reasons = [])
    
 
 
